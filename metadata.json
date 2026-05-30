@@ -1,0 +1,6 @@
+{
+  "name": "Doomsday Master",
+  "description": "Learn and practice the Doomsday rule for calculating the day of the week, featuring analytics and glassmorphism design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
