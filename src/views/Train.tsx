@@ -17,6 +17,7 @@ interface TrainProps {
 export function Train({ setViewState }: TrainProps) {
   const { locale, formatDate } = useI18n();
   const isDe = locale === 'de';
+  const isLv = locale === 'lv';
 
   // State phases
   const [phase, setPhase] = useState<'config' | 'training'>('config');
@@ -119,11 +120,11 @@ export function Train({ setViewState }: TrainProps) {
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={handleFinish}>
           {phase === 'config' ? <ArrowLeft className="w-4 h-4 mr-2" /> : <Home className="w-4 h-4 mr-2" />} 
-          {phase === 'config' ? (isDe ? 'Zurück' : 'Back') : (isDe ? 'Training beenden' : 'End Training')}
+          {phase === 'config' ? (isDe ? 'Zurück' : isLv ? 'Atpakaļ' : 'Back') : (isDe ? 'Training beenden' : isLv ? 'Beigt apmācību' : 'End Training')}
         </Button>
         {phase === 'training' && (
           <div className="text-gray-400 font-mono text-lg flex items-center gap-2">
-            {isDe ? 'Punkte:' : 'Score:'} <span className="text-white">{score}</span> / {total}
+            {isDe ? 'Punkte:' : isLv ? 'Punkti:' : 'Score:'} <span className="text-white">{score}</span> / {total}
           </div>
         )}
       </div>
@@ -140,11 +141,13 @@ export function Train({ setViewState }: TrainProps) {
             >
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold text-white tracking-tight">
-                  {isDe ? 'Epochen-Auswahl' : 'Select Centuries'}
+                  {isDe ? 'Epochen-Auswahl' : isLv ? 'Gadsimtu izvēle' : 'Select Centuries'}
                 </h2>
                 <p className="text-gray-400">
                   {isDe 
                     ? 'Wähle aus, aus welchen Jahrhunderten Daten generiert werden sollen.' 
+                    : isLv 
+                    ? 'Izvēlieties gadsimtus treniņam.' 
                     : 'Choose which centuries to practice with.'}
                 </p>
               </div>
@@ -170,7 +173,7 @@ export function Train({ setViewState }: TrainProps) {
 
               <div className="flex justify-center pt-8">
                 <Button onClick={startTraining} size="lg" className="w-full md:w-auto md:px-12 py-3 text-lg">
-                  {isDe ? 'Training starten' : 'Start Training'}
+                  {isDe ? 'Training starten' : isLv ? 'Sākt apmācību' : 'Start Training'}
                 </Button>
               </div>
             </motion.div>
@@ -192,13 +195,13 @@ export function Train({ setViewState }: TrainProps) {
                   }}
                 >
                   <HelpCircle className="w-4 h-4 mr-2 text-blue-400" />
-                  {isDe ? 'Spickzettel' : 'Cheat Sheet'}
+                  {isDe ? 'Spickzettel' : isLv ? 'Špikeris' : 'Cheat Sheet'}
                 </Button>
               </div>
 
               <div className="space-y-4 pt-8">
                 <p className="text-gray-400 uppercase tracking-widest text-sm">
-                  {isDe ? 'Welcher Wochentag ist das?' : 'What day is it?'}
+                  {isDe ? 'Welcher Wochentag ist das?' : isLv ? 'Kura nedēļas diena tā ir?' : 'What day is it?'}
                 </p>
                 <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight py-4">
                   {formatDate(currentDate.year, currentDate.month, currentDate.day)}
@@ -232,7 +235,7 @@ export function Train({ setViewState }: TrainProps) {
                     <Check className="w-12 h-12 text-emerald-400" />
                   </div>
                   <h3 className="text-3xl font-semibold text-emerald-400">
-                    {isDe ? 'Richtig!' : 'Correct!'}
+                    {isDe ? 'Richtig!' : isLv ? 'Pareizi!' : 'Correct!'}
                   </h3>
                 </>
               ) : (
@@ -241,10 +244,10 @@ export function Train({ setViewState }: TrainProps) {
                     <X className="w-12 h-12 text-red-400" />
                   </div>
                   <h3 className="text-3xl font-semibold text-red-400">
-                     {isDe ? 'Falsch' : 'Incorrect'}
+                     {isDe ? 'Falsch' : isLv ? 'Nepareizi' : 'Incorrect'}
                   </h3>
                   <p className="text-xl text-gray-300">
-                     {isDe ? `Es war ein ${feedback.cAct}` : `It was a ${feedback.cAct}`}
+                     {isDe ? `Es war ein ${feedback.cAct}` : isLv ? `Tā bija ${feedback.cAct}` : `It was a ${feedback.cAct}`}
                   </p>
                 </>
               )}

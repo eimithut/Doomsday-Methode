@@ -8,6 +8,7 @@ const Home = lazy(() => import('./views/Home').then(m => ({ default: m.Home })))
 const Learn = lazy(() => import('./views/Learn').then(m => ({ default: m.Learn })));
 const Train = lazy(() => import('./views/Train').then(m => ({ default: m.Train })));
 const Analytics = lazy(() => import('./views/Analytics').then(m => ({ default: m.Analytics })));
+const Daily = lazy(() => import('./views/Daily').then(m => ({ default: m.Daily })));
 
 const Loader = () => (
   <div className="flex-1 flex items-center justify-center min-h-[50vh]">
@@ -47,6 +48,11 @@ export default function App() {
             {view === 'train' && (
               <Suspense key="s-train" fallback={<Loader />}>
                 <Train setViewState={setViewState} />
+              </Suspense>
+            )}
+            {view === 'daily' && (
+              <Suspense key="s-daily" fallback={<Loader />}>
+                <Daily setViewState={setViewState} />
               </Suspense>
             )}
             {view === 'analytics' && (

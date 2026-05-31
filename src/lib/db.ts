@@ -66,13 +66,50 @@ export async function getDB() {
 
 export async function saveProgress(completedLessons: number[]): Promise<void> {
   const db = await getDB();
-  await db.put('progress', { id: 'user', completedLessons });
+  const existing = await db.get('progress', 'user');
+  await db.put('progress', { 
+    id: 'user', 
+    completedLessons,
+    streak: existing?.streak,
+    lastDailyDate: existing?.lastDailyDate
+  });
 }
 
 export async function getProgress(): Promise<number[]> {
   const db = await getDB();
   const data = await db.get('progress', 'user');
   return data?.completedLessons || [];
+}
+
+export async function getFullProgress() {
+  const db = await getDB();
+  return db.get('progress', 'user');
+}
+
+export async function saveDailyStreak(dateStr: string): Promise<void> {
+  const db = await getDB();
+  const existing = await db.get('progress', 'user');
+  let streak = existing?.streak || 0;
+  
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = `${yesterday.getFullYear()}-${(yesterday.getMonth()+1).toString().padStart(2, '0')}-${yesterday.getDate().toString().padStart(2, '0')}`;
+  
+  if (existing?.lastDailyDate === yesterdayStr) {
+    streak += 1;
+  } else if (existing?.lastDailyDate === dateStr) {
+    // Already completed today do nothing to streak
+  } else {
+    // Missed a day or first time
+    streak = 1;
+  }
+
+  await db.put('progress', { 
+    id: 'user', 
+    completedLessons: existing?.completedLessons || [],
+    streak,
+    lastDailyDate: dateStr
+  });
 }
 
 export async function addSession(session: Omit<Session, 'id'>): Promise<number> {

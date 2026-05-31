@@ -21,6 +21,7 @@ interface LearnProps {
 export function Learn({ setViewState }: LearnProps) {
   const { locale } = useI18n();
   const isDe = locale === 'de';
+  const isLv = locale === 'lv';
 
   const [currentStep, setCurrentStep] = useState(0);
   const [completed, setCompleted] = useState<number[]>([]);
@@ -64,6 +65,12 @@ export function Learn({ setViewState }: LearnProps) {
     "Die Jahrhundert-Codes",
     "Der Jahres-Code",
     "Das Finale"
+  ] : isLv ? [
+    "Pastardienas Koncepcija",
+    "Mēnešu Enkuri",
+    "Gadsimtu Kodi",
+    "Gada Kods",
+    "Fināls"
   ] : [
     "The Doomsday Concept",
     "The Month Anchors",
@@ -83,10 +90,10 @@ export function Learn({ setViewState }: LearnProps) {
     >
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={() => setViewState('home')}>
-          <HomeIcon className="w-4 h-4 mr-2" /> {isDe ? 'Menü' : 'Menu'}
+          <HomeIcon className="w-4 h-4 mr-2" /> {isDe ? 'Menü' : isLv ? 'Izvēlne' : 'Menu'}
         </Button>
         <div className="text-gray-400">
-          {isDe ? `Lektion ${currentStep + 1} von 5` : `Lesson ${currentStep + 1} of 5`}
+          {isDe ? `Lektion ${currentStep + 1} von 5` : isLv ? `Nodarbība ${currentStep + 1} no 5` : `Lesson ${currentStep + 1} of 5`}
         </div>
       </div>
 
@@ -134,7 +141,7 @@ export function Learn({ setViewState }: LearnProps) {
                   className="px-3"
                   onClick={() => setCurrentStep(currentStep - 1)}
                 >
-                  &larr; {isDe ? 'Zurück' : 'Back'}
+                  &larr; {isDe ? 'Zurück' : isLv ? 'Atpakaļ' : 'Back'}
                 </Button>
               )}
               <h2 className="flex-1 text-3xl font-bold text-white flex items-center gap-3">

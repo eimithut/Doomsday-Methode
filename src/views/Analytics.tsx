@@ -81,7 +81,7 @@ export function Analytics({ setViewState }: AnalyticsProps) {
 
   const monthErrors = Object.entries(monthStats)
     .map(([m, data]: [string, any]) => ({
-      name: isDe ? ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'][parseInt(m)-1] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][parseInt(m)-1],
+      name: isDe ? ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'][parseInt(m)-1] : locale === 'lv' ? ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jūn', 'Jūl', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'][parseInt(m)-1] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][parseInt(m)-1],
       errorRate: Math.round((data.err / data.total) * 100)
     }))
     .sort((a, b) => b.errorRate - a.errorRate) // highest error rate first

@@ -24,11 +24,13 @@ export interface Answer {
 }
 
 export interface Progress {
-  id: string;
+  id: string; // usually 'user'
   completedLessons: number[];
+  streak?: number;
+  lastDailyDate?: string; // YYYY-MM-DD
 }
 
-export type ViewState = 'home' | 'learn' | 'train' | 'analytics';
+export type ViewState = 'home' | 'learn' | 'train' | 'analytics' | 'daily';
 
 export interface LearnStep {
   title: string;

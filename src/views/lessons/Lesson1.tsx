@@ -5,6 +5,7 @@ import { useI18n } from "../../lib/i18n";
 export function Lesson1({ onComplete }: { onComplete: () => void }) {
   const { locale } = useI18n();
   const isDe = locale === 'de';
+  const isLv = locale === 'lv';
 
   return (
     <div className="space-y-6">
@@ -23,6 +24,22 @@ export function Lesson1({ onComplete }: { onComplete: () => void }) {
               Wenn du also weißt, dass der Doomsday eines Jahres ein Dienstag ist, weißt du auch sofort, 
               an welchen Tagen diese Ankerdaten liegen (nämlich auch an einem Dienstag). 
               Von dort aus ist es nur noch einfache Addition oder Subtraktion, um jedes beliebige Datum zu finden.
+            </p>
+          </>
+        ) : isLv ? (
+          <>
+             <p>
+              Esiet sveicināti <strong className="text-white">Pastardienas algoritma</strong> apmācībā! 
+              Šo matemātisko tehniku izgudroja slavenais matemātiķis Džons Konvejs.
+            </p>
+            <p>
+              Koncepcija balstās uz faktu, ka katram gadam ir noteikta bāzes nedēļas diena — saukta par <strong>"Pastardienu"</strong> (Doomsday). 
+              Katrā mēnesī ir noteikti, viegli iegaumējami datumi ("Enkuri"), kas vienmēr iekrīt šajā nedēļas dienā.
+            </p>
+            <p>
+              Līdz ar to, ja jūs zināt, ka konkrētā gada bāzes diena ir otrdiena, jūs automātiski zināt, 
+              ka visi šie enkura datumi arī ir otrdiena. 
+              No šī punkta tā ir tikai vienkārša saskaitīšana vai atņemšana, lai noteiktu jebkuru datumu.
             </p>
           </>
         ) : (
@@ -46,7 +63,7 @@ export function Lesson1({ onComplete }: { onComplete: () => void }) {
 
       <div className="pt-6 border-t border-white/10 flex justify-end">
         <Button variant="success" onClick={onComplete}>
-          {isDe ? 'Konzept verstanden!' : 'Got it!'}
+          {isDe ? 'Konzept verstanden!' : isLv ? 'Saprasts!' : 'Got it!'}
         </Button>
       </div>
     </div>

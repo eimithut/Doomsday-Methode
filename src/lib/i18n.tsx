@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type Locale = 'de' | 'en';
+export type Locale = 'de' | 'en' | 'lv';
 
 interface I18nContextType {
   locale: Locale;
@@ -21,6 +21,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     // strict formatting required by instructions
     if (locale === 'de') {
       return `${d.toString().padStart(2, '0')}.${m.toString().padStart(2, '0')}.${y}`;
+    } else if (locale === 'lv') {
+      return `${d.toString().padStart(2, '0')}.${m.toString().padStart(2, '0')}.${y}.`;
     } else {
       return `${m.toString().padStart(2, '0')}/${d.toString().padStart(2, '0')}/${y}`;
     }

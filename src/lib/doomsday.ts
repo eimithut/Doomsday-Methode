@@ -2,12 +2,14 @@
 
 const DAYS = {
   de: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
-  en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  lv: ["Svētdiena", "Pirmdiena", "Otrdiena", "Trešdiena", "Ceturtdiena", "Piektdiena", "Sestdiena"]
 };
 
 const MONTHS = {
   de: ["", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-  en: ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  en: ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  lv: ["", "Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"]
 };
 
 export function isLeapYear(year: number): boolean {
